@@ -14,10 +14,14 @@ After several minutes get your root password:
 
 `docker-compose exec gitlab /usr/bin/cat /etc/gitlab/initial_root_password`
 
-Go to http://gitlab.local:8880/ and log in as root with the above password.
+Go to http://gitlab.local/ and log in as root with the above password.
 
 Click on menu -> admin -> runners and copy the registration token, then replace
-the one in the command below and run it:
+the one in the command below.
+
+Also get the network from `docker network ls` and also replace it below.
+
+Then run the command:
 
 ```
 docker compose exec gitlab-runner gitlab-runner register \
@@ -25,15 +29,14 @@ docker compose exec gitlab-runner gitlab-runner register \
     --executor="docker" \
     --custom_build_dir-enabled="true" \
     --docker-image="docker" \
-    --url="http://gitlab:80" \
-    --clone-url="http://gitlab:80" \
-    --registration-token="@@@@@REPLACE_WITH_YOUR_REGISTRATION_TOKEN@@@@@" \
+    --url="http://gitlab" \
+    --clone-url="http://gitlab" \
+    --registration-token="@@@@REPLACE_WITH_YOUR_REGISTRATION_TOKEN@@@@" \
     --description="docker-runner" \
     --tag-list="docker" \
     --run-untagged="true" \
     --locked="false" \
-    --docker-network-mode="gitlab-docker_gitlab" \
-    --docker-disable-cache="true" \
+    --docker-network-mode="@@@@REPLACE_WITH_YOUR_NETWORK@@@@" \
     --docker-privileged="true" \
     --cache-dir="/cache" \
     --builds-dir="/builds" \
