@@ -14,7 +14,7 @@ After several minutes get your root password:
 
 `docker-compose exec gitlab /usr/bin/cat /etc/gitlab/initial_root_password`
 
-Go to http://gitlab.local/ and log in as root with the above password.
+Go to http://gitlab.local:8880/ and log in as root with the above password.
 
 Click on menu -> admin -> runners and copy the registration token, then replace
 the one in the command below.
